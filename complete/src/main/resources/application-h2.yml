@@ -1,0 +1,44 @@
+dsProfiles:
+  h2: &h2
+    url: jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  bj: &bj
+#    url: jdbc:mysql://192.168.5.122:3306/dbs_lims_cloud?&useSSL=false
+#    username: root
+#    password: rootsunway
+#    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dbs_lims_cloud?&useSSL=false
+    username: root
+    password: rootsunway
+    driver-class-name: com.mysql.jdbc.Driver
+
+spring:
+  freemarker:
+    cache: false
+  datasource:
+    <<: *h2
+  devtools:
+    restart:
+      enabled: false
+
+docker:
+  script:
+    targetDir: E:/Desktop/scripts #谨慎配置该路径，默认会删除该目录然后重建
+generate:
+  nginxSavePath: d:/chub.conf  
+cron:
+  msgGatewayContextPath: http://118.190.153.23/msggateway
+  portalContextPath: http://localhost:8086/sunwaycloud
+  centralContextPath: http://118.190.153.23/central
+loadbalance:
+   defaultServer: 192.168.1.30:8003
+rest:
+  routes:
+    loadbalancer:
+      url: http://localhost:8004
+      path: /loadbalancer/v1
+    remoteclient:
+      url: http://192.168.1.30:8003
+      path: /remoteclient

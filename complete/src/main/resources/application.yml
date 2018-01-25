@@ -1,0 +1,35 @@
+server:
+  port: 8007
+  context-path: /
+spring:
+  profiles:
+    active: prod
+  http:
+    encoding:
+      force: true
+  freemarker:
+    cache: true
+    check-template-location: true
+    template-loader-path: classpath:/templates/
+    charset: UTF-8
+    expose-spring-macro-helpers: true
+    prefer-file-system-access: false #使用classpath下的资源文件优先
+  thymeleaf:
+    prefix: classpath:/webapp/
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+  aop:
+    proxy-target-class: true
+  data:
+    rest:
+      basePath: /api
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
